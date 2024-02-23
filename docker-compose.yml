@@ -4,7 +4,7 @@ services:
   app:
     build: .
     container_name: granada_app
-    command: python3 manage.py runserver
+    command: python3 manage.py runserver 0.0.0.0:8043
     volumes:
       - ./analyzer:/usr/src/app
     ports:
