@@ -1,0 +1,105 @@
+@keyframes slideUp {
+    from {
+      margin-top: 100px;
+      opacity: 0;
+    }
+    to {
+      margin-top: 0;
+      opacity: 1;
+    }
+  }
+  
+  /* image for the background */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #343a40;
+    color: #f8f9fa;
+    background-image: url("./lumu_logo.png");
+    background-size: contain;
+  }
+  
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1;
+  }
+  
+  .scrollable-table {
+    max-height: 550px;
+    overflow-y: scroll;
+  }
+  
+  
+  h1 {
+    animation: slideUp 2s ease;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .btn-position{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .container-stats{
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-position {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: auto;
+    min-height: 70px;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .footer-title {
+    color: #fff;
+    line-height: 1;
+  }
+  
+  .btn-primary-custom {
+    color: #fff;
+    background-color: #F98E00;
+    border-color: #F98E00;
+  }
+  
+  
+  .margin-top-10 {
+    margin-top: 2.5em;
+  }
+  
+  .margin-top-5 {
+    margin-top: 1em;
+  }
+  
+  .margin-bt-1 {
+    margin-bottom: 1em;
+  }
+  
+  .margin-lft-12px {
+    margin-left: 12px;
+  }
+  
+  .rounded-full {
+    border-radius: 9999px;
+  }
