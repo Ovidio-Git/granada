@@ -3,11 +3,33 @@ version: '3.8'
 services:
   app:
     build: .
-    container_name: lumu_app
-    command: python3 app.py # this is the command to run the app
+    container_name: granada_app
+    command: python3 manage.py runserver
     volumes:
-      - .:/usr/src/app #this volume if for debug the app in real time
+      - ./analyzer:/usr/src/app
     ports:
-      - "8043:8043" #this is the port where the app will be running
+      - "8043:8043"
     env_file:
-      - ./.env #this is the file where the environment variables are stored
+      - ./.env
+  
+  db:
+    image: postgres:latest
+    container_name: granada_db
+    env_file:
+      - ./.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: granada_pgadmin
+    ports:
+      - "5050:80"
+    env_file:
+      - ./.env
+    volumes:
+      - ./pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - db
