@@ -1,35 +1,51 @@
 version: '3.8'
 
 services:
-  app:
-    build: .
-    container_name: granada_app
+  frontend:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    container_name: app_frontend
+    command: npm start
+    #command: tail -f /dev/null
+    volumes:
+      - ./frontend/granada-front/:/usr/src/app
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./frontend/.env
+
+  backend:
+    build: 
+      context: ./backend/
+      dockerfile: Dockerfile
+    container_name: app_backend
     command: python3 manage.py runserver 0.0.0.0:8043
     volumes:
-      - ./analyzer:/usr/src/app
+      - ./backend/analyzer:/usr/src/app
     ports:
       - "8043:8043"
     env_file:
-      - ./.env
-  
+      - ./backend/.env
+
   db:
     image: postgres:latest
-    container_name: granada_db
+    container_name: app_db
     env_file:
-      - ./.env
+      - ./backend/.env
     ports:
       - "5432:5432"
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - ./backend/postgres_data:/var/lib/postgresql/data
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: granada_pgadmin
+    container_name: app_pgadmin
     ports:
       - "5050:80"
     env_file:
-      - ./.env
+      - ./backend/.env
     volumes:
-      - ./pgadmin_data:/var/lib/pgadmin
+      - ./backend/pgadmin_data:/var/lib/pgadmin
     depends_on:
       - db
